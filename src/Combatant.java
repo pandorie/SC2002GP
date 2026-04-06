@@ -1,4 +1,4 @@
-public class Combatant {
+public abstract class Combatant {
     private String Name;
     private int Hp;
     private int maxHp;
@@ -7,19 +7,27 @@ public class Combatant {
     private int spd;
 //    private effects<>  implement when effects is added
 
-}
 
-public void takeDamage(int damage){
+    public Combatant(String name, int hp, int maxhp, int atk, int def, int spd){
+        this.Name = name;
+        this.Hp = hp;
+        this.maxHp = maxhp;
+        this.atk = atk;
+        this.def = def;
+        this.spd = spd;
+    }
 
-}
 
-public void Heal(int amount){
+    public void takeDamage(int damage){
 
-}
+    }
 
-public void applyEffect(e statusEffect){
+    public void Heal(int amount){
 
-}
+    }
 
-void main() {
+    public void applyEffect(e statusEffect){
+
+    }
+
 }
