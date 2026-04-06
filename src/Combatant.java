@@ -20,3 +20,6 @@ public void Heal(int amount){
 public void applyEffect(e statusEffect){
 
 }
+
+void main() {
+}
