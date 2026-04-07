@@ -19,11 +19,30 @@ public abstract class Combatant {
 
 
     public void takeDamage(int damage){
+        if(damage == 0){
+            return;
+        }
+        else if(damage > getDef()){
 
+            setHp(getHp()-(damage - getDef()));
+        }
+        else{
+            // dmg lower than def so nothing happens
+        }
     }
 
     public void Heal(int amount){
-
+        if(getHp() == getMaxHp()){
+            System.out.println("already maxed hp");
+        }
+        else if(getHp() < getMaxHp()){
+            if(getHp() + amount >= getMaxHp()){
+                setHp(getMaxHp());
+            }
+            else{
+                setHp(getHp() + amount);
+            }
+        }
     }
 
 //    public void applyEffect(e statusEffect){
