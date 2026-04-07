@@ -1,9 +1,11 @@
-public abstract class Player {
-    //private item items<> add after item is added
+public abstract class Player extends Combatant {
+    //private List<Item> inventory add after item is added
     private int skillCooldown;
 
-    public Player(int skillCooldown) {
-        this.skillCooldown = skillCooldown;
+    public Player(String name, int hp, int maxhp, int atk, int def, int spd) {
+        super(name,hp,maxhp,atk,def,spd);
+//      this.inventory = new ArrayList; uncomment ater adding inventory
+        this.skillCooldown = 0;
     }
 
 //    public void useItem(item item){
