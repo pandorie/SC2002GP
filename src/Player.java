@@ -34,4 +34,6 @@ public abstract class Player extends Combatant {
     public String getSkillName() {
         return skillName;
     }
+
+
 }
