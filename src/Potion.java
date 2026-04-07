@@ -1,3 +1,17 @@
 public class Potion extends Item {
-    private String itemName;
+    public Potion(int quantity) {
+        super("Potion", quantity);
+    };
+
+    public void use(Player target) {
+        if(getQuantity() <= 0) {
+            System.out.println("No potions available!");
+            return;
+        }
+        int newHP = Math.min(target.getHp() + 100, target.getMaxHp());
+        target.setHp(newHP);
+        setQuantity(getQuantity() - 1);
+
+    }
+
 }
