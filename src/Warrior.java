@@ -14,6 +14,6 @@ public abstract class Warrior extends Player {
 
 
     public void SpecialSkill(List<Enemy> targets){
-
+        
     }
 }
