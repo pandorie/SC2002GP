@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Combatant {
     private String name;
     private int Hp;
@@ -5,7 +7,7 @@ public abstract class Combatant {
     private int atk;
     private int def;
     private int spd;
-//    private effects<>  implement when effects is added
+    private List<StatusEffect> effects;
 
 
     public Combatant(String name, int hp, int maxhp, int atk, int def, int spd){
@@ -86,6 +88,9 @@ public abstract class Combatant {
         return this.spd;
     }
 
+    public List<StatusEffect> getEffects(){
+        return this.effects;
+    }
 
 
     //setters
@@ -113,5 +118,9 @@ public abstract class Combatant {
 
     public void setSpd(int spd) {
         this.spd = spd;
+    }
+
+    public void setEffects(StatusEffect effect){
+        this.effects.add(effect);
     }
 }
