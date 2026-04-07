@@ -23,7 +23,7 @@ public abstract class Player extends Combatant {
 
     }
 
-    public void getItem(){
+    public void getItems(){
 
     }
 
