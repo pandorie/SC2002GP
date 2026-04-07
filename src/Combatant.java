@@ -50,8 +50,7 @@ public abstract class Combatant {
 //    }
 
     public void tickEffects(){
-
-        
+        // effects duration - 1 in here
     }
 
     public boolean isAlive(){
