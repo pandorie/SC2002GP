@@ -1,11 +1,12 @@
 public class Goblin extends Enemy {
-    private int hp;
-    private int atk;
-    private int def;
-    private int spd;
+    private static final String name = "goblin";
+    private static final int hp = 55;
+    private static final int atk = 35;
+    private static final int def = 15;
+    private static final int spd = 25;
 
 
-    public Goblin(String name, int hp, int maxhp, int atk, int def, int spd) {
-        super(name, hp, maxhp, atk, def, spd);
+    public Goblin() {
+        super(name, hp, hp, atk, def, spd);
     }
 }
