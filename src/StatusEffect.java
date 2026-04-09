@@ -13,9 +13,15 @@ public abstract class StatusEffect {
 
     }
 
-    public void isExpired(){
+    public boolean isExpired(){
 
     }
 
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
+    public int getDuration(){
+        return this.duration;
+    }
 }
