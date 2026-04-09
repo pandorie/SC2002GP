@@ -13,7 +13,7 @@ public class Warrior extends Player {
     }
 
 
-    public void SpecialSkill(List<Enemy> targets){
+    public void executeSpecialSkill(List<Enemy> targets){
         
     }
 }

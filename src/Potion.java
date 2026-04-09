@@ -1,9 +1,11 @@
+import java.util.List;
+
 public class Potion extends Item {
     public Potion(int quantity) {
         super("Potion", quantity);
     };
 
-    public void use(Player target) {
+    public void use(Player target, List<Enemy> enemy) {
         if(getQuantity() <= 0) {
             System.out.println("No potions available!");
             return;

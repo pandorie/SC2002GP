@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Item {
     private int quantity;
     private String itemName;
@@ -19,6 +21,6 @@ public abstract class Item {
         this.quantity = quantity;
     }
 
-    public abstract void use(Player target);
+    public abstract void use(Player target, List<Enemy> enemy);
 }
 

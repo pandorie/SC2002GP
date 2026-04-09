@@ -13,8 +13,8 @@ public class Wizard extends Player{
         super(name, hp, maxhp, atk, def, spd, skillname);
     }
 
-    public void specialSkill(List<Enemy> targets){
-
+    public void executeSpecialSkill(List<Enemy> targets){
+        
     }
 
 }
