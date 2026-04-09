@@ -120,7 +120,7 @@ public abstract class Combatant {
         this.spd = spd;
     }
 
-    public void setEffects(StatusEffect effect){
+    public void addEffects(StatusEffect effect){
         this.effects.add(effect);
     }
 }
