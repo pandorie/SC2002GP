@@ -1,5 +1,7 @@
+import java.util.List;
+
 public abstract class Player extends Combatant {
-    //private List<Item> inventory add after item is added
+    private List<Item> inventory;
     private int skillCooldown;
     private String skillName;
 
@@ -11,20 +13,16 @@ public abstract class Player extends Combatant {
 
     }
 
-//    public void useItem(item item){
-//
-//    } uncomment after item is added
+    public void useItem(Item item){
+        item.use(this);
+    }
 
     public void executeSpecialSkill(){
 
     }
 
     public void decrementCoolDown(){
-
-    }
-
-    public void getItems(){
-
+        this.setskillcooldown(getSkillCooldown()-1);
     }
 
     public int getSkillCooldown() {
@@ -33,6 +31,10 @@ public abstract class Player extends Combatant {
 
     public String getSkillName() {
         return skillName;
+    }
+
+    public void setskillcooldown(int cooldown){
+         this.skillCooldown = cooldown;
     }
 
 
