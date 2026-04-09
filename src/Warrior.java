@@ -1,6 +1,6 @@
 import java.util.List;
 
-public abstract class Warrior extends Player {
+public class Warrior extends Player {
     private static final String name = "Warrior";
     private static final int hp = 260;
     private static final int maxhp = 260;
