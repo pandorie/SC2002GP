@@ -57,12 +57,12 @@ public class InputHandler {
         boolean isValid = false;
 
         do {
-            System.out.println("What will " + player.getName() + "do?");
+            System.out.println("What will " + player.getName() + " do?");
             System.out.println("1. Basic Attack");
             System.out.println("2. Defend");
             System.out.println("3. " + player.getSkillName() + " Cooldown: " + player.getSkillCooldown());
             System.out.println("4. use Item");
-            System.out.println("Select a Action: 1-4");
+            System.out.println("Select an Action: 1-4");
 
             try {
                 int choice = scanner.nextInt();
