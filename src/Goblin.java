@@ -9,5 +9,7 @@ public class Goblin extends Enemy {
 
     public Goblin() {
         super(name, hp, maxhp, atk, def, spd);
+        this.setBehaviour(new BasicAttackBehaviour());
     }
+
 }

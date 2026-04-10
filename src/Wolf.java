@@ -8,5 +8,6 @@ public class Wolf extends Enemy {
 
     public Wolf() {
         super(name, hp, maxHp, atk, def, spd);
+        this.setBehaviour(new BasicAttackBehaviour());
     }
 }
