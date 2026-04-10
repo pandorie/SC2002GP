@@ -22,16 +22,15 @@ public abstract class Combatant {
 
 
     public void takeDamage(int damage){
-        if(damage == 0){
+        if(damage <= 0){
             return;
         }
-        else if(damage > getDef()){
+        this.setHp(this.getHp() - damage);
 
-            setHp(getHp()-(damage - getDef()));
+        if(this.getHp() <= 0){
+            this.setHp(0);
         }
-        else{
-            // dmg lower than def so nothing happens
-        }
+
     }
 
     public void Heal(int amount){
@@ -68,7 +67,13 @@ public abstract class Combatant {
     }
 
     public boolean isAlive(){
-        return true;
+        if(this.getHp() <= 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 
     public boolean isStunned(){

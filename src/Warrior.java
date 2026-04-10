@@ -14,6 +14,13 @@ public class Warrior extends Player {
 
 
     public void executeSpecialSkill(List<Enemy> targets){
-        
+        Enemy target = targets.get(0);
+        int damage = this.getAtk() - target.getDef();
+        target.takeDamage(damage);
+        System.out.println(this.getName() + " uses " + this.getSkillName() + " " + target.getName() +
+                " for " + damage);
+        StunEffect stun = new StunEffect();
+        stun.apply(target);
+
     }
 }
