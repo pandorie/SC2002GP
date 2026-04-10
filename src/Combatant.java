@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Combatant {
@@ -53,6 +54,17 @@ public abstract class Combatant {
 
     public void tickEffects(){
         // effects duration - 1 in here
+        Iterator<StatusEffect> iterator = this.effects.iterator();
+
+        while(iterator.hasNext()){
+            StatusEffect effect = iterator.next();
+            effect.tick(this);
+
+            if(effect.isExpired()){
+                effect.removeEffect(this);
+                iterator.remove();
+            }
+        }
     }
 
     public boolean isAlive(){
