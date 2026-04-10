@@ -52,16 +52,41 @@ public class InputHandler {
         return selectedLevel;
     }
 
-//
-//    public Action SelectAction(Player player){
-//
-//    }
-//
-//    public Item selectItem(){
-//
-//    }
-//
-//    public Combatant selectTarget(List<Enemy> enemies){
-//
-//    }
+
+    public Action SelectAction(Player player){
+        Action selectedAction = null;
+        boolean isValid = false;
+
+        do {
+
+        }
+        while (!isValid);
+        return selectedAction;
+    }
+
+    public Item selectItem(){
+        Item selectedItem = null;
+        boolean isValid = false;
+
+        do{
+
+        }
+        while(!isValid);
+
+        return selectedItem;
+
+    }
+
+    public Combatant selectTarget(List<Enemy> enemies){
+        Combatant selectedTarget = null;
+        boolean isvalid = false;
+
+        do{
+
+        }
+        while (!isvalid);
+
+        return selectedTarget;
+
+    }
 }
