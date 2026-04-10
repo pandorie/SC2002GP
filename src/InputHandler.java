@@ -122,12 +122,16 @@ public class InputHandler {
 
                 switch (choice) {
                     case 1:
+                        selectedItem = new Potion(1);
+                        isValid = true;
                         break;
                     case 2:
+                        selectedItem = new SmokeBomb(1);
+                        isValid = true;
                         break;
                     case 3:
-                        break;
-                    case 4:
+                        selectedItem = new PowerStone(1);
+                        isValid = true;
                         break;
                     default:
                         System.out.println("Invalid choice");
@@ -147,28 +151,26 @@ public class InputHandler {
         boolean isValid = false;
 
         do {
-            System.out.println("Select 2 items to use in the level");
-            System.out.println("1. Potion");
-            System.out.println("2. Smoke Bomb");
-            System.out.println("3. Power Stone");
-            System.out.println("Select a Item: 1-3");
+            System.out.println("Select Target");
+            for(int i = 0; i < enemies.size(); i++){
+                Enemy enemy = enemies.get(i);
+                System.out.println((i+1) + "." + enemy.getName() + " Hp: " + enemy.getHp() + "/" + enemy.getMaxHp());
+            }
+            System.out.println("Select Target: (1-" + enemies.size() + ")");
 
             try {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                switch (choice) {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    default:
-                        System.out.println("Invalid choice");
+                int index = choice -1;
+                if(index >= 0 && index < enemies.size()){
+                    selectedTarget = enemies.get(index);
+                    isValid = true;
                 }
+                else{
+                    System.out.println("Invalid target");
+                }
+
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number");
                 scanner.nextLine();
