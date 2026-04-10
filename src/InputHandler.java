@@ -87,7 +87,7 @@ public class InputHandler {
                         }
                         break;
                     case 4:
-                        Item selectedItem = selectItem();
+                        Item selectedItem = selectItem(player);
                         if(selectedItem != null){
                             selectedAction = new useItem(selectedItem);
                             isValid = true;
@@ -105,37 +105,41 @@ public class InputHandler {
         return selectedAction;
     }
 
-    public Item selectItem() {
+    public Item selectItem(Player player) {
+        List<Item> inventory = player.getInventory();
         Item selectedItem = null;
         boolean isValid = false;
 
+        if(inventory.isEmpty()){
+            System.out.println("Inventory is Empty");
+            return null;
+        }
+
         do {
-            System.out.println("Select 2 items to use in the level");
-            System.out.println("1. Potion");
-            System.out.println("2. Smoke Bomb");
-            System.out.println("3. Power Stone");
-            System.out.println("Select a Item: 1-3");
+            System.out.println("Inventory");
+            for (int i=0; i<inventory.size(); i++){
+                System.out.println((i+1) +". " + inventory.get(i).getName());
+            }
+
+            int cancelOption = inventory.size() +1;
+            System.out.println(cancelOption + ".Cancel");
+            System.out.println("Selection an Option 1-" + cancelOption);
 
             try {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                switch (choice) {
-                    case 1:
-                        selectedItem = new Potion(1);
-                        isValid = true;
-                        break;
-                    case 2:
-                        selectedItem = new SmokeBomb(1);
-                        isValid = true;
-                        break;
-                    case 3:
-                        selectedItem = new PowerStone(1);
-                        isValid = true;
-                        break;
-                    default:
-                        System.out.println("Invalid choice");
+                if(choice>0 && choice <= inventory.size()){
+                    selectedItem = inventory.get(choice-1);
+                    isValid = true;
                 }
+                else if(choice == cancelOption){
+                    isValid=true;
+                }
+                else{
+                    System.out.println("Invalid Choice");
+                }
+
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a number");
                 scanner.nextLine();

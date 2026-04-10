@@ -17,6 +17,14 @@ public class BattleEngine {
         this.input = input;
     }
 
+    public BattleEngine(Player player, Level level, List<Enemy> enemies, TurnScheduler turnScheduler, InputHandler input) {
+        this.player = player;
+        this.level = level;
+        this.enemies = enemies;
+        this.turnScheduler = turnScheduler;
+        this.input = input;
+    }
+
     public void StartBattle() {
         boolean BattleOver = false;
 
@@ -117,6 +125,10 @@ public class BattleEngine {
             return true;
         }
         return false;
+    }
+
+    public Player getPlayer(){
+        return this.player;
     }
 
 }
