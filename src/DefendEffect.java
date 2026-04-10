@@ -3,12 +3,13 @@ public class DefendEffect extends StatusEffect {
 
     public DefendEffect(){
         super();
+
     }
 
     @Override
     public void apply(Combatant c) {
         c.addEffects(this);
-        c.setDef(getDuration() + Bonus_def);
+        c.setDef(c.getDef() + Bonus_def);
         System.out.println(c.getName() + " Defends. Increasing Defense by " + Bonus_def);
     }
 

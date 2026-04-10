@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public abstract class Combatant {
         this.atk = atk;
         this.def = def;
         this.spd = spd;
+        this.effects = new ArrayList<>();
     }
 
 
