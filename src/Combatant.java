@@ -77,7 +77,12 @@ public abstract class Combatant {
     }
 
     public boolean isStunned(){
-        return true;
+        for(StatusEffect effect : this.effects){
+            if(effect instanceof StunEffect){
+                return true;
+            }
+        }
+        return false;
     }
 
 
