@@ -1,38 +1,144 @@
-package arena.UI;
-
-import arena.Engine.BattleEngine;
-import arena.Engine.Level;
-import arena.Model.Combatant;
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameManager {
-    private BattleEngine engine;
-    private GameLog log;
     private InputHandler input;
+    private Scanner scanner;
+    private boolean isPlaying;
 
     public GameManager() {
-        this.log = new GameLog();
         this.input = new InputHandler();
+        this.scanner = new Scanner(System.in);
+        this.isPlaying = true;
     }
 
-    public void startGame() {
-        int difficultyIndex = input.selectDifficulty(new String[]{"Easy", "Medium", "Hard"});
-        Level level = loadGame(difficultyIndex);
-        loadNextLevel(level);
+    public void start() {
+        System.out.println("Game started");
+        do {
+            handleMainMenu();
+        }
+        while (isPlaying);
+        scanner.close();
     }
 
-    public void loadNextLevel(Level level) {
-        List<Combatant> combatants = new ArrayList<>();
-        // Player selection would go here; for now add a default
-        combatants.add(new arena.Model.Warrior());
-        engine = new BattleEngine(combatants, new arena.Engine.SpeedOrder(), level, log, input);
-        engine.run();
+    public void handleMainMenu() {
+        System.out.println("1. Start Game");
+        System.out.println("2. Exit");
+        System.out.println("Select option 1-2");
+
+        try {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 1) {
+                BattleSetUp();
+            } else if (choice == 2) {
+                System.out.println("qutting the game");
+                isPlaying = false;
+            } else {
+                System.out.println("Invalid Choice");
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Please type a Number");
+            scanner.nextLine();
+        }
+
     }
 
-    public Level loadGame(int difficultyIndex) {
-        List<Level> levels = Level.getAllLevels();
-        return levels.get(difficultyIndex);
+    public void BattleSetUp() {
+        Level selectLevel = input.SelectDifficulty();
+
+        Player player = selectCharacter();
+
+        SelectStartingItem(player);
+
+        TurnScheduler turnScheduler = new SpeedOrder();
+
+        BattleEngine game = new BattleEngine(player, selectLevel, turnScheduler, input);
+
+        game.StartBattle();
+
     }
+
+    public Player selectCharacter() {
+        Player player = null;
+        boolean isValid = false;
+
+        do {
+            System.out.println("Select Class");
+            System.out.println("1. Class: Warrior, Stats: HP: 260, ATK: 40, DEF: 20, SPD: 30 " +
+                    "Special Skill: Shield Bash Effect: Deal BasicAttack damage to selected enemy. " +
+                    "Selected enemy is unable to take actions for the current turn and the next turn.");
+            System.out.println("2. Class: Wizard  Stats: HP: 200, ATK: 50, DEF: 10, SPD: 20 " +
+                    "Special Skill: Arcane Blast Effect: Deal BasicAttack damage to all enemies " +
+                    "currently in combat. Each enemy defeated by Arcane Blast adds 10 to the " +
+                    "Wizard’s Attack, lasting until end of the level.");
+            System.out.println("choose Class 1-2");
+
+            try {
+                int classChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                if (classChoice == 1) {
+                    player = new Warrior();
+                    isValid = true;
+                } else if (classChoice == 2) {
+                    player = new Wizard();
+                    isValid = true;
+                } else {
+                    System.out.println("Invalid Class");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number");
+            }
+        }
+        while (!isValid);
+
+        return player;
+    }
+
+    public void SelectStartingItem(Player player) {
+        System.out.println("Select 2 Starting Item");
+        int count = 0;
+        do {
+            System.out.println("Select Item " + (count + 1) + " of 2:");
+            System.out.println("1. Potion");
+            System.out.println("2. Smoke Bomb");
+            System.out.println("3. Power Stone");
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        player.addItem(new Potion(1));
+                        count++;
+                        break;
+                    case 2:
+                        player.addItem(new SmokeBomb(1));
+                        count++;
+                        break;
+                    case 3:
+                        player.addItem(new PowerStone(1));
+                        count++;
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number");
+                scanner.nextLine();
+            }
+
+        } while (count < 2);
+
+    }
+
+
 }
