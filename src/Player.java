@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Player extends Combatant {
@@ -7,7 +8,7 @@ public abstract class Player extends Combatant {
 
     public Player(String name, int hp, int maxhp, int atk, int def, int spd,String skillname) {
         super(name,hp,maxhp,atk,def,spd);
-//      this.inventory = new ArrayList; uncomment ater adding inventory
+        this.inventory = new ArrayList<>();
         this.skillCooldown = 0;
         this.skillName = skillname;
 
