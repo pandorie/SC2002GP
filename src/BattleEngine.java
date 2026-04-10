@@ -46,7 +46,7 @@ public class BattleEngine {
                     ((Enemy) currentCombatant).takeTurn(this);
                 }
 
-//                UpdateGameState();
+                UpdateGameState();
 
                 BattleOver = CheckWinCondition();
 
@@ -69,7 +69,23 @@ public class BattleEngine {
         while (iterator.hasNext()){
             Enemy enemy = iterator.next();
             if(!enemy.isAlive()){
+                iterator.remove();
+            }
 
+            if (enemies.isEmpty()){
+                if(level.hasBackupWave()){
+
+                    List<String> SpawnNames = new ArrayList<>();
+
+                    while(level.hasBackupWave()){
+                        Enemy backup = level.triggerBackupSpawn();
+
+                        SpawnNames.add(backup.getName() + " (Hp:" + enemy.getHp() + ")");
+                        enemies.add(backup);
+                    }
+                    System.out.println("All initial enemies eliminated → Backup Spawn triggered! " + SpawnNames + " enter simultaneously");
+
+                }
             }
         }
 
