@@ -18,7 +18,7 @@ public class Wizard extends Player{
         for(Enemy target: targets){
             int damage = this.getAtk() - target.getDef();
             target.takeDamage(damage);
-            System.out.println(this.getName() + "use Arcane Blast " + target.getName() + " for " + damage);
+            System.out.println(this.getName() + " use Arcane Blast on " + target.getName() + " for " + damage);
             if(!target.isAlive()){
                 ArcaneBlastEffect existingbuff = null;
                 for(StatusEffect effect: this.getEffects()){
