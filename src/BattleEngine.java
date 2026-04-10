@@ -7,42 +7,41 @@ public class BattleEngine {
     private Level level;
     private List<Enemy> enemies;
     private TurnScheduler turnScheduler;
-//    private InputHandler input;
+    private InputHandler input;
 
-    public BattleEngine(Player player, Level level, TurnScheduler turnScheduler){
+    public BattleEngine(Player player, Level level, TurnScheduler turnScheduler, InputHandler input) {
         this.player = player;
         this.level = level;
         this.turnScheduler = turnScheduler;
         this.enemies = new ArrayList<>(level.getInitialEnemies());
-//        this.input = input;
+        this.input = input;
     }
 
-    public void StartBattle(){
+    public void StartBattle() {
         boolean BattleOver = false;
 
-        while(!BattleOver){
+        while (!BattleOver) {
             List<Combatant> CombatantList = new ArrayList<>();
             CombatantList.add(player);
             CombatantList.addAll(enemies);
 
             List<Combatant> turnOrder = turnScheduler.getOrder(CombatantList);
 
-            for(Combatant currentCombatant: turnOrder){
-                if(!currentCombatant.isAlive()){
+            for (Combatant currentCombatant : turnOrder) {
+                if (!currentCombatant.isAlive()) {
                     continue;
                 }
                 System.out.println(currentCombatant.getName() + "'s Turn");
 
                 currentCombatant.tickEffects();
-                if(currentCombatant.isStunned()){
+                if (currentCombatant.isStunned()) {
                     System.out.println(currentCombatant.getName() + " is Stunned for the turn");
                     continue;
                 }
 
-                if(currentCombatant instanceof Player){
-//                    handlePlayerTurn();
-                }
-                else if (currentCombatant instanceof Enemy) {
+                if (currentCombatant instanceof Player) {
+                    playerTurn();
+                } else if (currentCombatant instanceof Enemy) {
                     ((Enemy) currentCombatant).takeTurn(this);
                 }
 
@@ -50,7 +49,7 @@ public class BattleEngine {
 
                 BattleOver = CheckWinCondition();
 
-                if(BattleOver){
+                if (BattleOver) {
                     break;
                 }
 
@@ -58,45 +57,62 @@ public class BattleEngine {
         }
     }
 
-    public void playerTurn(){
+    //New Method
+    public void playerTurn() {
+        Action playerChoice = input.SelectAction(player);
+
+        List<Combatant> EnemyList = new ArrayList<>();
+
+        if (playerChoice instanceof BasicAttack || playerChoice instanceof SpecialSkill) {
+            Combatant target = input.selectTarget(enemies);
+            EnemyList.add(target);
+        } else {
+            EnemyList.addAll(enemies);
+        }
+
+        playerChoice.execute(player, EnemyList);
+
+        if (player.getSkillCooldown() > 0) {
+            player.decrementCoolDown();
+        }
 
     }
 
-    public void UpdateGameState(){
-        List<Enemy> SpawnEnemy = new ArrayList<>();
+
+    public void UpdateGameState() {
 
         Iterator<Enemy> iterator = enemies.iterator();
-        while (iterator.hasNext()){
+        while(iterator.hasNext()) {
             Enemy enemy = iterator.next();
-            if(!enemy.isAlive()){
+            if (!enemy.isAlive()) {
                 iterator.remove();
             }
+        }
 
-            if (enemies.isEmpty()){
-                if(level.hasBackupWave()){
+        if (enemies.isEmpty()) {
+            if (level.hasBackupWave()) {
 
-                    List<String> SpawnNames = new ArrayList<>();
+                List<String> SpawnNames = new ArrayList<>();
 
-                    while(level.hasBackupWave()){
-                        Enemy backup = level.triggerBackupSpawn();
+                while (level.hasBackupWave()) {
+                    Enemy backup = level.triggerBackupSpawn();
 
-                        SpawnNames.add(backup.getName() + " (Hp:" + enemy.getHp() + ")");
-                        enemies.add(backup);
-                    }
-                    System.out.println("All initial enemies eliminated → Backup Spawn triggered! " + SpawnNames + " enter simultaneously");
-
+                    SpawnNames.add(backup.getName() + " (Hp:" + backup.getHp() + ")");
+                    enemies.add(backup);
                 }
+                System.out.println("All initial enemies eliminated → Backup Spawn triggered! " + SpawnNames + " enter simultaneously");
+
             }
         }
+
 
     }
 
-    public boolean CheckWinCondition(){
-        if(!player.isAlive()){
+    public boolean CheckWinCondition() {
+        if (!player.isAlive()) {
             System.out.println(player.getName() + " has been defeated");
             return true;
-        }
-        else if(enemies.isEmpty() && !level.hasBackupWave()){
+        } else if (enemies.isEmpty() && !level.hasBackupWave()) {
             System.out.println("Victory");
             return true;
         }
