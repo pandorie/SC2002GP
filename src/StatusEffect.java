@@ -13,7 +13,18 @@ public abstract class StatusEffect {
 
     }
 
+    //added new method
+    public void removeEffect(Combatant c){
+
+    }
+
     public boolean isExpired(){
+        if(getDuration() <=0){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
