@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialSkill implements Action {
-    private String Name = "SpecialSkill";
+//    private String Name = "SpecialSkill";
     @Override
     public void execute(Combatant source, List<Combatant> targets) {
         if(source instanceof Player){
@@ -29,7 +29,7 @@ public class SpecialSkill implements Action {
     }
 
     @Override
-    public String getName(String name) {
-        return this.Name;
+    public String getName() {
+        return "SpecialSkill";
     }
 }
