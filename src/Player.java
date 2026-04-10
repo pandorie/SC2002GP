@@ -38,5 +38,17 @@ public abstract class Player extends Combatant {
          this.skillCooldown = cooldown;
     }
 
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    public void addItem(Item item){
+        this.inventory.add(item);
+    }
+
+    public void removeItem(Item item){
+        this.inventory.remove(item);
+    }
+
 
 }
