@@ -30,6 +30,6 @@ public class SpecialSkill implements Action {
 
     @Override
     public String getName() {
-        return "SpecialSkill";
+        return "Special Skill";
     }
 }

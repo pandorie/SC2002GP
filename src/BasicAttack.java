@@ -11,11 +11,11 @@ public class BasicAttack implements Action{
         Combatant target = targets.get(0);
         int damage = source.getAtk() - target.getDef();
         target.takeDamage(damage);
-        System.out.println(source.getName() + "attacks" + target.getName() + " for " + damage );
+        System.out.println(source.getName() + " attacks " + target.getName() + " for " + damage );
     }
 
     @Override
     public String getName() {
-        return "BasicAttack";
+        return " Basic Attack";
     }
 }
