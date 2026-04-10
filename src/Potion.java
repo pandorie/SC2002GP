@@ -10,8 +10,12 @@ public class Potion extends Item {
             System.out.println("No potions available!");
             return;
         }
-        int newHP = Math.min(target.getHp() + 100, target.getMaxHp());
-        target.setHp(newHP);
+//        int newHP = Math.min(target.getHp() + 100, target.getMaxHp());
+//        target.setHp(newHP);
+
+        System.out.println(target.getName() + "->" + "Item" + "->" + this.getName());
+        target.Heal(100);
+
         setQuantity(getQuantity() - 1);
 
     }
