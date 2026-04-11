@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class GameManager {
@@ -32,13 +30,14 @@ public class GameManager {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-            if (choice == 1) {
-                BattleSetUp();
-            } else if (choice == 2) {
-                System.out.println("qutting the game");
-                isPlaying = false;
-            } else {
-                System.out.println("Invalid Choice");
+            // Replaced with Enhanced switch statement
+            switch (choice) {
+                case 1 -> BattleSetUp();
+                case 2 -> {
+                    System.out.println("quitting the game");
+                    isPlaying = false;
+                }
+                default -> System.out.println("Invalid choice");
             }
 
         } catch (InputMismatchException e) {
@@ -82,14 +81,17 @@ public class GameManager {
                 int classChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (classChoice == 1) {
-                    player = new Warrior();
-                    isValid = true;
-                } else if (classChoice == 2) {
-                    player = new Wizard();
-                    isValid = true;
-                } else {
-                    System.out.println("Invalid Class");
+                // Replaced with Enhanced switch statement
+                switch (classChoice) {
+                    case 1 -> {
+                        player = new Warrior();
+                        isValid = true;
+                    }
+                    case 2 -> {
+                        player = new Wizard();
+                        isValid = true;
+                    }
+                    default -> System.out.println("Invalid Class");
                 }
 
             } catch (InputMismatchException e) {
@@ -114,21 +116,21 @@ public class GameManager {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
+                // Replaced with Enhanced switch statement
                 switch (choice) {
-                    case 1:
+                    case 1 -> {
                         player.addItem(new Potion(1));
                         count++;
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         player.addItem(new SmokeBomb(1));
                         count++;
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         player.addItem(new PowerStone(1));
                         count++;
-                        break;
-                    default:
-                        System.out.println("Invalid choice");
+                    }
+                    default -> System.out.println("Invalid choice");
                 }
 
             } catch (InputMismatchException e) {
