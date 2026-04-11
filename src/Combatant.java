@@ -68,14 +68,14 @@ public abstract class Combatant {
         }
     }
 
+    // Replaced with simpler return statement
     public boolean isAlive(){
-        if(this.getHp() <= 0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return this.getHp() > 0;
+    }
 
+    // Added
+    public boolean isDefeated() {
+        return !isAlive();
     }
 
     public boolean isStunned(){
@@ -87,6 +87,15 @@ public abstract class Combatant {
         return false;
     }
 
+    // Added
+    public boolean isShielded(){
+        for(StatusEffect effect : this.effects){
+            if(effect instanceof DefendEffect){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public String getName(){
         return this.name;
