@@ -8,6 +8,8 @@ public class BattleEngine {
     private List<Enemy> enemies;
     private TurnScheduler turnScheduler;
     private InputHandler input;
+    private int round;
+    private GameLog gameLog;
 
     public BattleEngine(Player player, Level level, TurnScheduler turnScheduler, InputHandler input) {
         this.player = player;
@@ -15,6 +17,7 @@ public class BattleEngine {
         this.turnScheduler = turnScheduler;
         this.enemies = new ArrayList<>(level.getInitialEnemies());
         this.input = input;
+        this.round = 1;
     }
 
     public BattleEngine(Player player, Level level, List<Enemy> enemies, TurnScheduler turnScheduler, InputHandler input) {
@@ -55,6 +58,8 @@ public class BattleEngine {
 
                 UpdateGameState();
 
+                round++;
+
                 BattleOver = CheckWinCondition();
 
                 if (BattleOver) {
@@ -71,9 +76,17 @@ public class BattleEngine {
 
         List<Combatant> EnemyList = new ArrayList<>();
 
-        if (playerChoice instanceof BasicAttack || playerChoice instanceof SpecialSkill) {
+        if (playerChoice instanceof BasicAttack) {
             Combatant target = input.selectTarget(enemies);
             EnemyList.add(target);
+        } else if (playerChoice instanceof SpecialSkill) {
+            if (player instanceof Wizard) {
+                EnemyList.addAll(enemies);
+                System.out.println("Arcane Blast hits all enemies");
+            } else if (player instanceof Warrior) {
+                Combatant target = input.selectTarget(enemies);
+                EnemyList.add(target);
+            }
         } else {
             EnemyList.addAll(enemies);
         }
@@ -90,7 +103,7 @@ public class BattleEngine {
     public void UpdateGameState() {
 
         Iterator<Enemy> iterator = enemies.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
             if (!enemy.isAlive()) {
                 iterator.remove();
@@ -127,7 +140,7 @@ public class BattleEngine {
         return false;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return this.player;
     }
 
