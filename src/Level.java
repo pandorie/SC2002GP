@@ -32,6 +32,42 @@ public abstract class Level {
         return this.backupWave.remove(0);
     }
 
+    public void spawnInitialEnemies(String enemyType, int enemy_count){
+        for(int i = 0; i<enemy_count; i++){
+            String letter = String.valueOf((char) ('A' + i));
+            switch(enemyType.toLowerCase()){
+                case "goblin" -> this.addInitialEnemies(new Goblin(letter));
+                case "wolf" -> this.addInitialEnemies(new Wolf(letter));
+                default -> System.out.println("invalid enemy type: " + enemyType);
+            }
+
+        }
+    }
+
+    public void spawnBackupEnemies(String enemyType, int enemy_count){
+        for(int i = 0; i<enemy_count; i++){
+            String letter = String.valueOf((char) ('A' + i));
+            switch(enemyType.toLowerCase()){
+                case "goblin" -> this.addBackUpEnemy(new Goblin(letter));
+                case "wolf" -> this.addBackUpEnemy(new Wolf(letter));
+                default -> System.out.println("invalid enemy type: " + enemyType);
+            }
+
+        }
+    }
+
+
+    public void spawn_wolf(int wolf_count){
+        for(int i = 0; i<wolf_count; i++){
+            String letter = String.valueOf((char) ('A' + i));
+            this.addInitialEnemies(new Wolf(letter));
+
+        }
+    }
+
+
+
+
     //getters
 
     public String getLevelName() {
