@@ -25,7 +25,7 @@ public abstract class Combatant {
 
     public void takeDamage(int damage){
         if(damage <= 0){
-            return;
+            damage = 0;
         }
         this.setHp(this.getHp() - damage);
 
