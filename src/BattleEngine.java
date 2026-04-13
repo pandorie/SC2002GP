@@ -78,22 +78,22 @@ public class BattleEngine {
     //New Method
     public void playerTurn() {
         Action playerChoice = input.SelectAction(player);
-
         List<Combatant> EnemyList = new ArrayList<>();
+        boolean needTarget = singleTarget(player, playerChoice);
 
-        if (playerChoice instanceof BasicAttack) {
+
+
+        if(needTarget){
             Combatant target = input.selectTarget(enemies);
             EnemyList.add(target);
-        } else if (playerChoice instanceof SpecialSkill) {
-            if (player instanceof Wizard) {
-                EnemyList.addAll(enemies);
-                System.out.println("Arcane Blast hits all enemies");
-            } else if (player instanceof Warrior) {
-                Combatant target = input.selectTarget(enemies);
-                EnemyList.add(target);
-            }
-        } else {
+        }
+        else{
             EnemyList.addAll(enemies);
+            if(player instanceof Wizard && playerChoice instanceof SpecialSkill ||
+                    player instanceof Wizard && playerChoice instanceof useItem &&
+                            ((useItem)playerChoice).getSelectedItem() instanceof PowerStone){
+                System.out.println("Arcane Blast hits all enemies");
+            }
         }
 
         playerChoice.execute(player, EnemyList);
@@ -135,7 +135,22 @@ public class BattleEngine {
     }
 
 
-//    public boolean
+    public boolean singleTarget(Player player, Action choice){
+        if(choice instanceof BasicAttack){
+            return true;
+        }
+        if(choice instanceof SpecialSkill){
+            return player instanceof Warrior;
+        }
+
+        if(choice instanceof useItem){
+            Item selectedItem = ((useItem) choice).getSelectedItem();
+            if(selectedItem instanceof PowerStone){
+                return player instanceof Warrior;
+            }
+        }
+        return false;
+    }
 
 
     public boolean CheckWinCondition() {
