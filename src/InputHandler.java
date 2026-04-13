@@ -74,12 +74,24 @@ public class InputHandler {
                         isValid = true;
                         break;
                     case 2:
-                        selectedAction = new Defend();
-                        isValid = true;
-                        break;
+                        boolean alreadyDefending = false;
+                        for(StatusEffect effect: player.getEffects()){
+                            if(effect instanceof DefendEffect){
+                                alreadyDefending = true;
+                                break;
+                            }
+                    }
+                        if(alreadyDefending){
+                            System.out.println("You are already defending. Choose a different action");
+                        }
+                        else {
+                            selectedAction = new Defend();
+                            isValid = true;
+                        }
+                            break;
                     case 3:
                         if(player.getSkillCooldown() > 0){
-                            System.out.println("Skill is on cooldown");
+                            System.out.println("Skill is on cooldown. Choose a different action");
                         }
                         else{
                             selectedAction = new SpecialSkill();
