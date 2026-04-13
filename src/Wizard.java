@@ -1,17 +1,17 @@
 import java.util.List;
 
 public class Wizard extends Player{
-    private static final String name = "Wizard";
-    private static final int hp = 200;
-    private static final int maxhp = 200;
-    private static final int atk = 50;
-    private static final int def = 10;
-    private static final int spd = 20;
-    private static final String skillname = "Arcane Blast";
+    private static final String NAME = "Wizard";
+    private static final int HP = 200;
+    private static final int MAXHP = 200;
+    private static final int ATK = 50;
+    private static final int DEF = 10;
+    private static final int SPD = 20;
+    private static final String SKILLNAME = "Arcane Blast";
     private int bonus_atk = 0;
 
     public Wizard() {
-        super(name, hp, maxhp, atk, def, spd, skillname);
+        super(NAME, HP, MAXHP, ATK, DEF, SPD, SKILLNAME);
     }
 
     public void executeSpecialSkill(List<Enemy> targets){
