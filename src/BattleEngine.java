@@ -18,6 +18,7 @@ public class BattleEngine {
         this.enemies = new ArrayList<>(level.getInitialEnemies());
         this.input = input;
         this.round = 1;
+        this.gameLog = new GameLog();
     }
 
     public BattleEngine(Player player, Level level, List<Enemy> enemies, TurnScheduler turnScheduler, InputHandler input) {
@@ -32,6 +33,9 @@ public class BattleEngine {
         boolean BattleOver = false;
 
         while (!BattleOver) {
+
+            gameLog.showRoundStart(round);
+
             List<Combatant> CombatantList = new ArrayList<>();
             CombatantList.add(player);
             CombatantList.addAll(enemies);
@@ -55,19 +59,20 @@ public class BattleEngine {
                 } else if (currentCombatant instanceof Enemy) {
                     ((Enemy) currentCombatant).takeTurn(this);
                 }
+            }
+            gameLog.showCombatantStatus(CombatantList, getRound());
 
-                UpdateGameState();
+            UpdateGameState();
 
-                round++;
+            round++;
 
-                BattleOver = CheckWinCondition();
+            BattleOver = CheckWinCondition();
 
-                if (BattleOver) {
-                    break;
-                }
-
+            if (BattleOver) {
+                break;
             }
         }
+        gameLog.checkFinalResult(player);
     }
 
     //New Method
@@ -129,12 +134,15 @@ public class BattleEngine {
 
     }
 
+
+//    public boolean
+
+
     public boolean CheckWinCondition() {
         if (!player.isAlive()) {
             System.out.println(player.getName() + " has been defeated");
             return true;
         } else if (enemies.isEmpty() && !level.hasBackupWave()) {
-            System.out.println("Victory");
             return true;
         }
         return false;
@@ -144,4 +152,7 @@ public class BattleEngine {
         return this.player;
     }
 
+    public int getRound() {
+        return round;
+    }
 }

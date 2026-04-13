@@ -32,4 +32,8 @@ public class useItem implements Action {
     public String getName() {
         return "useItem";
     }
+
+    public Item getSelectedItem() {
+        return SelectedItem;
+    }
 }

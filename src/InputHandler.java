@@ -118,7 +118,7 @@ public class InputHandler {
         do {
             System.out.println("Inventory");
             for (int i=0; i<inventory.size(); i++){
-                System.out.println((i+1) +". " + inventory.get(i).getName());
+                System.out.println((i+1) +". " + inventory.get(i).getName() + " Quantity:" + inventory.get(i).getQuantity());
             }
 
             int cancelOption = inventory.size() +1;

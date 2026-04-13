@@ -119,15 +119,15 @@ public class GameManager {
                 // Replaced with Enhanced switch statement
                 switch (choice) {
                     case 1 -> {
-                        player.addItem(new Potion(1));
+                        checkItemexist(player,new Potion(1));
                         count++;
                     }
                     case 2 -> {
-                        player.addItem(new SmokeBomb(1));
+                        checkItemexist(player,new SmokeBomb(1));
                         count++;
                     }
                     case 3 -> {
-                        player.addItem(new PowerStone(1));
+                        checkItemexist(player,new PowerStone(1));
                         count++;
                     }
                     default -> System.out.println("Invalid choice");
@@ -140,6 +140,18 @@ public class GameManager {
 
         } while (count < 2);
 
+    }
+
+    //Added check for quantity
+    public void checkItemexist(Player player, Item selectedItem){
+        for(Item exisitItem: player.getInventory()){
+            if(exisitItem.getName().equals(selectedItem.getName())){
+                exisitItem.setQuantity(exisitItem.getQuantity() + selectedItem.getQuantity());
+                return;
+            }
+
+        }
+        player.addItem(selectedItem);
     }
 
 
