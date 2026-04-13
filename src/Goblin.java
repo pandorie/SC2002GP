@@ -7,7 +7,7 @@ public class Goblin extends Enemy {
 
 
     public Goblin(String letter) {
-        super("Goblin" + letter, HP, MAXHP, ATK, DEF, SPD);
+        super("Goblin " + letter, HP, MAXHP, ATK, DEF, SPD);
         this.setBehaviour(new BasicAttackBehaviour());
     }
 

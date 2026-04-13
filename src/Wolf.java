@@ -6,7 +6,7 @@ public class Wolf extends Enemy {
     private static final int SPD = 35;
 
     public Wolf(String letter) {
-        super("Wolf" + letter, HP, MAXHP, ATK, DEF, SPD);
+        super("Wolf " + letter, HP, MAXHP, ATK, DEF, SPD);
         this.setBehaviour(new BasicAttackBehaviour());
     }
 }
