@@ -11,6 +11,7 @@ public class SmokeBomb extends Item {
             return;
         }
         //Insert method to activate smokebomb effect when we finish implementing it
+        System.out.println("Smoke Bomb used: Enemy attacks deal 0 damage this turn + next");
         for(Enemy enemy: enemies){
             if(enemy.isAlive()){
                 SmokeBombEffect smokebomb = new SmokeBombEffect();

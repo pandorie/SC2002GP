@@ -10,7 +10,6 @@ public class SmokeBombEffect extends StatusEffect{
         c.addEffects(this);
         this.OriginalAttack = c.getAtk();
         c.setAtk(0);
-        System.out.println("Smoke Bomb used: Enemy attacks deal 0 damage this turn + next");
 
     }
 
