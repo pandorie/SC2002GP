@@ -1,13 +1,14 @@
 public class Goblin extends Enemy {
-    private static final int hp = 55;
-    private static final int maxhp = 55;
-    private static final int atk = 35;
-    private static final int def = 15;
-    private static final int spd = 25;
+    private static final String NAME = "goblin";
+    private static final int HP = 55;
+    private static final int MAXHP = 55;
+    private static final int ATK = 35;
+    private static final int DEF = 15;
+    private static final int SPD = 25;
 
 
-    public Goblin(String letter) {
-        super("Goblin " + letter, hp, maxhp, atk, def, spd);
+    public Goblin() {
+        super(NAME, HP, MAXHP, ATK, DEF, SPD);
         this.setBehaviour(new BasicAttackBehaviour());
     }
 

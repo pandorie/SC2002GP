@@ -1,15 +1,16 @@
 import java.util.List;
 
 public class Warrior extends Player {
-    private static final String name = "Warrior";
-    private static final int hp = 260;
-    private static final int maxhp = 260;
-    private static final int atk = 40;
-    private static final int def = 20;
-    private static final int spd = 30;
-    private static final String skillname = "Shield Bash";
+    private static final String NAME = "Warrior";
+    private static final int HP = 260;
+    private static final int MAXHP = 260;
+    private static final int ATK = 40;
+    private static final int DEF = 20;
+    private static final int SPD = 30;
+    private static final String SKILLNAME = "Shield Bash";
+
     public  Warrior(){
-        super(name, hp, maxhp,atk,def,spd,skillname);
+        super(NAME, HP, MAXHP, ATK, DEF, SPD, SKILLNAME);
     }
 
 
