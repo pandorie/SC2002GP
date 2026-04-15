@@ -103,7 +103,7 @@ public class BattleEngine {
 
         playerChoice.execute(player, EnemyList, gameLog);
 
-        if (player.getSkillCooldown() > 0) {
+        if (player.getSkillCooldown() > 0 && !(playerChoice instanceof SpecialSkill)) {
             player.decrementCoolDown();
         }
 
