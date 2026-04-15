@@ -40,7 +40,6 @@ public class BattleEngine {
                 }
                 System.out.println(currentCombatant.getName() + "'s Turn");
 
-                currentCombatant.tickEffects();
                 if (currentCombatant.isStunned()) {
                     System.out.println(currentCombatant.getName() + " is Stunned for the turn");
                     continue;
@@ -51,6 +50,8 @@ public class BattleEngine {
                 } else if (currentCombatant instanceof Enemy) {
                     ((Enemy) currentCombatant).takeTurn(this);
                 }
+
+                currentCombatant.tickEffects();
             }
             gameLog.showCombatantStatus(CombatantList, getRound());
 
