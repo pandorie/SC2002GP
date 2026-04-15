@@ -6,11 +6,11 @@ public class SmokeBombEffect extends StatusEffect{
     }
 
     @Override
-    public void apply(Combatant c) {
+    public void apply(Combatant c, GameLog log) {
         c.addEffects(this);
         this.OriginalAttack = c.getAtk();
         c.setAtk(0);
-
+        log.showStatusApplied(c, "Smoke Bomb");
     }
 
     @Override
@@ -19,8 +19,8 @@ public class SmokeBombEffect extends StatusEffect{
     }
 
     @Override
-    public void removeEffect(Combatant c) {
+    public void removeEffect(Combatant c, GameLog log) {
         c.setAtk(this.OriginalAttack);
-        System.out.println("Smoke Bomb effect expires");
+        log.showStatusExpired(c, "Smoke Bomb");
     }
 }

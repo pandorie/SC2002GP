@@ -7,10 +7,10 @@ public class DefendEffect extends StatusEffect {
     }
 
     @Override
-    public void apply(Combatant c) {
+    public void apply(Combatant c, GameLog log) {
         c.addEffects(this);
         c.setDef(c.getDef() + Bonus_def);
-        System.out.println(c.getName() + " Defends. Increasing Defense by " + Bonus_def);
+        log.showDefend(c, Bonus_def);
     }
 
     @Override
@@ -19,8 +19,8 @@ public class DefendEffect extends StatusEffect {
     }
 
     @Override
-    public void removeEffect(Combatant c) {
+    public void removeEffect(Combatant c, GameLog log) {
         c.setDef(c.getDef() - Bonus_def);
-        System.out.println(c.getName() + " Defends wore off. Defend has returned to normal");
+        log.showStatusExpired(c, "Defend");
     }
 }

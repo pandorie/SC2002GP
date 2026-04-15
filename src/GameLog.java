@@ -4,13 +4,40 @@ import java.util.List;
 
 public  class GameLog {
 
-
     public void showRoundStart(int round) {
         System.out.println("Round " + round);
     }
 
+    public void showTurnStart(Combatant c) {
+        System.out.println(c.getName() + "'s Turn");
+    }
+
     public void showActionResult(String msg) {
         System.out.println(msg);
+    }
+
+    public void showAttack(Combatant attacker, Combatant target, int damage) {
+        System.out.println(attacker.getName() + " attacks " + target.getName() + " for " + damage);
+    }
+
+    public void showSkillUse(Player p) {
+        System.out.println(p.getName() + " uses " + p.getSkillName());
+    }
+
+    public void showStatusApplied(Combatant c, String status) {
+        System.out.println(c.getName() + " is affected by " + status);
+    }
+
+    public void showStatusExpired(Combatant c, String status) {
+        System.out.println(status + " on " + c.getName() + " has expired");
+    }
+
+    public void showDefend(Combatant c, int bonusDef) {
+        System.out.println(c.getName() + " Defends. Increasing Defense by " + bonusDef);
+    }
+
+    public void showBackupWave(List<String> spawnNames) {
+        System.out.println("All initial enemies eliminated → Backup Spawn triggered! " + spawnNames + " enter simultaneously");
     }
 
     public void showCombatantStatus(List<Combatant> CombatantList, int round) {
@@ -70,9 +97,7 @@ public  class GameLog {
         }
 
         return " " + String.join(" ", Statuses);
-
     }
-
 
     public void checkFinalResult(Player player){
         if(player.isAlive()){
@@ -82,11 +107,4 @@ public  class GameLog {
             System.out.println("Defeated");
         }
     }
-
-
-
-
-
-
-
 }

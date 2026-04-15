@@ -14,7 +14,7 @@ public abstract class Enemy extends Combatant {
 
         List<Combatant> targets = new ArrayList<>();
         targets.add(context.getPlayer());
-        chooseAction.execute(this, targets);
+        chooseAction.execute(this, targets, context.getGameLog());
     }
 
     //Added Method

@@ -9,7 +9,7 @@ public class ArcaneBlastEffect extends StatusEffect{
     }
 
     @Override
-    public void apply(Combatant c) {
+    public void apply(Combatant c, GameLog log) {
         c.addEffects(this);
         this.addBonusAttack(c);
     }
@@ -37,7 +37,7 @@ public class ArcaneBlastEffect extends StatusEffect{
     }
 
     @Override
-    public void removeEffect(Combatant c) {
+    public void removeEffect(Combatant c, GameLog log) {
         c.setAtk(c.getAtk() - (stacks * bonusAtk));
     }
     //Added get and set for stacks

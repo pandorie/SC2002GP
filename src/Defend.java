@@ -3,9 +3,9 @@ import java.util.List;
 public class Defend implements Action {
 
     @Override
-    public void execute(Combatant source, List<Combatant> targets) {
+    public void execute(Combatant source, List<Combatant> targets, GameLog log) {
         DefendEffect defendbuff = new DefendEffect();
-        defendbuff.apply(source);
+        defendbuff.apply(source, log);
     }
 
     @Override

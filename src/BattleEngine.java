@@ -27,13 +27,14 @@ public class BattleEngine {
         this.enemies = enemies;
         this.turnScheduler = turnScheduler;
         this.input = input;
+        this.round = 1;
+        this.gameLog = new GameLog();
     }
 
     public void StartBattle() {
         boolean BattleOver = false;
 
         while (!BattleOver) {
-
             gameLog.showRoundStart(round);
 
             List<Combatant> CombatantList = new ArrayList<>();
@@ -46,11 +47,11 @@ public class BattleEngine {
                 if (!currentCombatant.isAlive()) {
                     continue;
                 }
-                System.out.println(currentCombatant.getName() + "'s Turn");
+                gameLog.showTurnStart(currentCombatant);
 
-                currentCombatant.tickEffects();
+                currentCombatant.tickEffects(gameLog);
                 if (currentCombatant.isStunned()) {
-                    System.out.println(currentCombatant.getName() + " is Stunned for the turn");
+                    gameLog.showActionResult(currentCombatant.getName() + " is Stunned for the turn");
                     continue;
                 }
 
@@ -92,11 +93,11 @@ public class BattleEngine {
             if(player instanceof Wizard && playerChoice instanceof SpecialSkill ||
                     player instanceof Wizard && playerChoice instanceof useItem &&
                             ((useItem)playerChoice).getSelectedItem() instanceof PowerStone){
-                System.out.println("Arcane Blast hits all enemies");
+                gameLog.showActionResult("Arcane Blast hits all enemies");
             }
         }
 
-        playerChoice.execute(player, EnemyList);
+        playerChoice.execute(player, EnemyList, gameLog);
 
         if (player.getSkillCooldown() > 0) {
             player.decrementCoolDown();
@@ -126,8 +127,7 @@ public class BattleEngine {
                     SpawnNames.add(backup.getName() + " (Hp:" + backup.getHp() + ")");
                     enemies.add(backup);
                 }
-                System.out.println("All initial enemies eliminated → Backup Spawn triggered! " + SpawnNames + " enter simultaneously");
-
+                gameLog.showBackupWave(SpawnNames);
             }
         }
 
@@ -155,7 +155,7 @@ public class BattleEngine {
 
     public boolean CheckWinCondition() {
         if (!player.isAlive()) {
-            System.out.println(player.getName() + " has been defeated");
+            gameLog.showActionResult(player.getName() + " has been defeated");
             return true;
         } else if (enemies.isEmpty() && !level.hasBackupWave()) {
             return true;
@@ -170,4 +170,6 @@ public class BattleEngine {
     public int getRound() {
         return round;
     }
+
+    public GameLog getGameLog() { return gameLog; }
 }

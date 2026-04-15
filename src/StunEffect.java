@@ -5,9 +5,9 @@ public class StunEffect extends StatusEffect {
         super();
     }
 
-    public void apply(Combatant c) {
+    public void apply(Combatant c, GameLog log) {
         c.addEffects(this);
-        System.out.println(c.getName() + " is Stunned. Turn skipped");
+        log.showStatusApplied(c, "Stun Effect. Turn Skipped.");
     }
 
     public void tick(Combatant c) {
@@ -15,8 +15,8 @@ public class StunEffect extends StatusEffect {
     }
 
     @Override
-    public void removeEffect(Combatant c) {
-        System.out.println(c.getName() + "is no longer stunned");
+    public void removeEffect(Combatant c, GameLog log) {
+        log.showStatusExpired(c, "Stun Effect");
     }
 
 

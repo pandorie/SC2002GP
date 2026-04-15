@@ -5,17 +5,17 @@ public class SmokeBomb extends Item {
         super("SmokeBomb", quantity);
     };
 
-    public void use(Player target, List<Enemy> enemies) {
+    public void use(Player target, List<Enemy> enemies, GameLog log) {
         if(getQuantity() <= 0) {
-            System.out.println("No smoke bombs available!");
+            log.showActionResult("No smoke bombs available!");
             return;
         }
         //Insert method to activate smokebomb effect when we finish implementing it
-        System.out.println("Smoke Bomb used: Enemy attacks deal 0 damage this turn + next");
+        log.showActionResult("Smoke Bomb used: Enemy attacks deal 0 damage this turn + next");
         for(Enemy enemy: enemies){
             if(enemy.isAlive()){
                 SmokeBombEffect smokebomb = new SmokeBombEffect();
-                smokebomb.apply(enemy);
+                smokebomb.apply(enemy, log);
             }
         }
         setQuantity(getQuantity() - 1);

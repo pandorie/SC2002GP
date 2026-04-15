@@ -4,11 +4,11 @@ import java.util.List;
 public class SpecialSkill implements Action {
 //    private String Name = "SpecialSkill";
     @Override
-    public void execute(Combatant source, List<Combatant> targets) {
+    public void execute(Combatant source, List<Combatant> targets, GameLog log) {
         if(source instanceof Player){
             Player player = (Player) source;
             if(player.getSkillCooldown() >0){
-                System.out.println(player.getName() + " tried to use " + player.getSkillName() +
+                log.showActionResult(player.getName() + " tried to use " + player.getSkillName() +
                         ", but it is on cooldown for " + player.getSkillCooldown() + " turn");
                 return;
             }
@@ -19,8 +19,8 @@ public class SpecialSkill implements Action {
                         enemyTargets.add((Enemy) c);
                     }
                 }
-                System.out.println(player.getName() + " uses " + player.getSkillName());
-                player.executeSpecialSkill(enemyTargets);
+                log.showSkillUse(player);
+                player.executeSpecialSkill(enemyTargets, log);
                 // if I put cd here then powerstone will be able to just call skill
                 player.setskillcooldown(3);
             }

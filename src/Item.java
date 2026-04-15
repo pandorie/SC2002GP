@@ -21,6 +21,6 @@ public abstract class Item {
         this.quantity = quantity;
     }
 
-    public abstract void use(Player target, List<Enemy> enemy);
+    public abstract void use(Player target, List<Enemy> enemy, GameLog log);
 }
 

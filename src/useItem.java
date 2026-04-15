@@ -9,7 +9,7 @@ public class useItem implements Action {
     }
 
     @Override
-    public void execute(Combatant source, List<Combatant> targets) {
+    public void execute(Combatant source, List<Combatant> targets, GameLog log) {
         if (source instanceof Player) {
             Player player = (Player) source;
             List<Enemy> enemy = new ArrayList<>();
@@ -18,7 +18,7 @@ public class useItem implements Action {
                     enemy.add((Enemy) c);
                 }
             }
-            SelectedItem.use(player, enemy);
+            SelectedItem.use(player, enemy, log);
             if(SelectedItem.getQuantity() <= 0){
                 player.removeItem(SelectedItem);
             }

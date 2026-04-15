@@ -14,11 +14,11 @@ public abstract class Player extends Combatant {
 
     }
 
-    public void useItem(Item item, List<Enemy> enemy){
-        item.use(this, enemy);
+    public void useItem(Item item, List<Enemy> enemy, GameLog log){
+        item.use(this, enemy, log);
     }
 
-    public void executeSpecialSkill(List<Enemy> enemy){
+    public void executeSpecialSkill(List<Enemy> enemy, GameLog log){
 
     }
 

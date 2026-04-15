@@ -14,11 +14,11 @@ public class Wizard extends Player{
         super(NAME, HP, MAXHP, ATK, DEF, SPD, SKILLNAME);
     }
 
-    public void executeSpecialSkill(List<Enemy> targets){
+    public void executeSpecialSkill(List<Enemy> targets, GameLog log){
         for(Enemy target: targets){
             int damage = this.getAtk() - target.getDef();
             target.takeDamage(damage);
-            System.out.println(this.getName() + " use Arcane Blast on " + target.getName() + " for " + damage);
+            log.showActionResult(this.getName() + " use Arcane Blast on " + target.getName() + " for " + damage);
             if(!target.isAlive()){
                 ArcaneBlastEffect existingbuff = null;
                 for(StatusEffect effect: this.getEffects()){
@@ -33,7 +33,7 @@ public class Wizard extends Player{
                 }
                 else{
                     ArcaneBlastEffect firstStack = new ArcaneBlastEffect();
-                    firstStack.apply(this);
+                    firstStack.apply(this, log);
                 }
             }
         }

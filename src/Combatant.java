@@ -53,7 +53,7 @@ public abstract class Combatant {
 //
 //    }
 
-    public void tickEffects(){
+    public void tickEffects(GameLog log){
         // effects duration - 1 in here
         Iterator<StatusEffect> iterator = this.effects.iterator();
 
@@ -62,7 +62,7 @@ public abstract class Combatant {
             effect.tick(this);
 
             if(effect.isExpired()){
-                effect.removeEffect(this);
+                effect.removeEffect(this, log);
                 iterator.remove();
             }
         }

@@ -5,17 +5,16 @@ public class Potion extends Item {
         super("Potion", quantity);
     };
 
-    public void use(Player target, List<Enemy> enemy) {
+    public void use(Player target, List<Enemy> enemy, GameLog log) {
         if(getQuantity() <= 0) {
-            System.out.println("No potions available!");
+            log.showActionResult("No potions available!");
             return;
         }
 //        int newHP = Math.min(target.getHp() + 100, target.getMaxHp());
 //        target.setHp(newHP);
 
-        System.out.println(target.getName() + "->" + "Item" + "->" + this.getName());
+        log.showActionResult(target.getName() + "->" + "Item" + "->" + this.getName());
         target.Heal(100);
-
         setQuantity(getQuantity() - 1);
 
     }

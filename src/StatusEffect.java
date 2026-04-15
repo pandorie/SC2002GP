@@ -5,7 +5,7 @@ public abstract class StatusEffect {
         this.duration = 2;
     }
 
-    public void apply(Combatant c){
+    public void apply(Combatant c, GameLog log){
 
     }
 
@@ -14,7 +14,7 @@ public abstract class StatusEffect {
     }
 
     //added new method
-    public void removeEffect(Combatant c){
+    public void removeEffect(Combatant c, GameLog log){
 
     }
 
