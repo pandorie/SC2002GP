@@ -52,17 +52,21 @@ public class BattleEngine {
 
                 if (currentCombatant.isStunned()) {
                     gameLog.showActionResult(currentCombatant.getName() + " is Stunned for the turn");
-                    continue;
+                } else {
+                    if (currentCombatant instanceof Player) {
+                        playerTurn();
+                    } else if (currentCombatant instanceof Enemy) {
+                        ((Enemy) currentCombatant).takeTurn(this);
+                    }
                 }
-
-                if (currentCombatant instanceof Player) {
-                    playerTurn();
-                } else if (currentCombatant instanceof Enemy) {
-                    ((Enemy) currentCombatant).takeTurn(this);
-                }
-
-                currentCombatant.tickEffects(gameLog);
             }
+
+            for(Combatant currentCombatant: CombatantList){
+                if(currentCombatant.isAlive()){
+                    currentCombatant.tickEffects(gameLog);
+                }
+            }
+
             gameLog.showCombatantStatus(CombatantList, getRound());
 
             UpdateGameState();
@@ -85,16 +89,14 @@ public class BattleEngine {
         boolean needTarget = singleTarget(player, playerChoice);
 
 
-
-        if(needTarget){
+        if (needTarget) {
             Combatant target = input.selectTarget(enemies);
             EnemyList.add(target);
-        }
-        else{
+        } else {
             EnemyList.addAll(enemies);
-            if(player instanceof Wizard && playerChoice instanceof SpecialSkill ||
+            if (player instanceof Wizard && playerChoice instanceof SpecialSkill ||
                     player instanceof Wizard && playerChoice instanceof useItem &&
-                            ((useItem)playerChoice).getSelectedItem() instanceof PowerStone){
+                            ((useItem) playerChoice).getSelectedItem() instanceof PowerStone) {
                 gameLog.showActionResult("Arcane Blast hits all enemies");
             }
         }
@@ -137,17 +139,17 @@ public class BattleEngine {
     }
 
 
-    public boolean singleTarget(Player player, Action choice){
-        if(choice instanceof BasicAttack){
+    public boolean singleTarget(Player player, Action choice) {
+        if (choice instanceof BasicAttack) {
             return true;
         }
-        if(choice instanceof SpecialSkill){
+        if (choice instanceof SpecialSkill) {
             return player instanceof Warrior;
         }
 
-        if(choice instanceof useItem){
+        if (choice instanceof useItem) {
             Item selectedItem = ((useItem) choice).getSelectedItem();
-            if(selectedItem instanceof PowerStone){
+            if (selectedItem instanceof PowerStone) {
                 return player instanceof Warrior;
             }
         }
@@ -173,5 +175,7 @@ public class BattleEngine {
         return round;
     }
 
-    public GameLog getGameLog() { return gameLog; }
+    public GameLog getGameLog() {
+        return gameLog;
+    }
 }
