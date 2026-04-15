@@ -7,7 +7,7 @@ public class StunEffect extends StatusEffect {
 
     public void apply(Combatant c, GameLog log) {
         c.addEffects(this);
-        log.showStatusApplied(c, "Stun Effect. Turn Skipped.");
+        log.showStatusApplied(c, "Stun Effect.");
     }
 
     public void tick(Combatant c) {
