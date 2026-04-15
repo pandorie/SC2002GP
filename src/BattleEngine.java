@@ -21,14 +21,6 @@ public class BattleEngine {
         this.gameLog = new GameLog();
     }
 
-    public BattleEngine(Player player, Level level, List<Enemy> enemies, TurnScheduler turnScheduler, InputHandler input) {
-        this.player = player;
-        this.level = level;
-        this.enemies = enemies;
-        this.turnScheduler = turnScheduler;
-        this.input = input;
-    }
-
     public void StartBattle() {
         boolean BattleOver = false;
 
