@@ -110,8 +110,15 @@ public  class GameLog {
     public void checkFinalResult(Player player,int totalRounds, int remainingEnemies){
         if(player.isAlive()){
             System.out.println("Congratulations you won");
-            System.out.println("Remaining Hp: " + player.getHp());
-            System.out.println("Total Rounds: " + totalRounds);
+            List<String> itemremaining = new ArrayList<>();
+            for(Item item: player.getInventory()){
+                String itemName = item.getName();
+                itemremaining.add("Remaining " + itemName + ": " + item.getQuantity());
+            }
+            String finalresult = "Result: Player Victory Remaining HP: " + player.getHp() + "/" + player.getMaxHp() + " | "
+                    + " Total Rounds: " +totalRounds + " | " + String.join(" | ", itemremaining);
+            System.out.println(finalresult);
+
         }
         else{
             System.out.println("Defeated");
