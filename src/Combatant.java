@@ -31,6 +31,7 @@ public abstract class Combatant {
 
         if(this.getHp() <= 0){
             this.setHp(0);
+            this.effects.clear();
         }
 
     }

@@ -12,6 +12,10 @@ public class BasicAttack implements Action{
         int damage = Math.max(0,source.getAtk() - target.getDef());
         target.takeDamage(damage);
         log.showAttack(source, target, damage);
+
+        if(target.isDefeated()){
+            log.showActionResult(target.getName() + " has been defeated");
+        }
     }
 
     @Override

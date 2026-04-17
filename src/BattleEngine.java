@@ -75,6 +75,9 @@ public class BattleEngine {
 
     //New Method
     public void playerTurn() {
+        if (player.getSkillCooldown() > 0) {
+            player.decrementCoolDown();
+        }
         Action playerChoice = input.SelectAction(player);
         List<Combatant> EnemyList = new ArrayList<>();
         boolean needTarget = singleTarget(player, playerChoice);
@@ -93,10 +96,6 @@ public class BattleEngine {
         }
 
         playerChoice.execute(player, EnemyList, gameLog);
-
-        if (player.getSkillCooldown() > 0 && !(playerChoice instanceof SpecialSkill)) {
-            player.decrementCoolDown();
-        }
 
     }
 
