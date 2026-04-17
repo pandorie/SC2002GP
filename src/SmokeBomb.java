@@ -2,7 +2,7 @@ import java.util.List;
 
 public class SmokeBomb extends Item {
     public SmokeBomb(int quantity) {
-        super("SmokeBomb", quantity);
+        super("Smoke Bomb", quantity);
     };
 
     public void use(Player target, List<Enemy> enemies, GameLog log) {

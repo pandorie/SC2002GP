@@ -1,6 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputHandler {
     private Scanner scanner;
@@ -75,32 +76,30 @@ public class InputHandler {
                         break;
                     case 2:
                         boolean alreadyDefending = false;
-                        for(StatusEffect effect: player.getEffects()){
-                            if(effect instanceof DefendEffect){
+                        for (StatusEffect effect : player.getEffects()) {
+                            if (effect instanceof DefendEffect) {
                                 alreadyDefending = true;
                                 break;
                             }
-                    }
-                        if(alreadyDefending){
-                            System.out.println("You are already defending. Choose a different action");
                         }
-                        else {
+                        if (alreadyDefending) {
+                            System.out.println("You are already defending. Choose a different action");
+                        } else {
                             selectedAction = new Defend();
                             isValid = true;
                         }
-                            break;
+                        break;
                     case 3:
-                        if(player.getSkillCooldown() > 0){
+                        if (player.getSkillCooldown() > 0) {
                             System.out.println("Skill is on cooldown. Choose a different action");
-                        }
-                        else{
+                        } else {
                             selectedAction = new SpecialSkill();
                             isValid = true;
                         }
                         break;
                     case 4:
                         Item selectedItem = selectItem(player);
-                        if(selectedItem != null){
+                        if (selectedItem != null) {
                             selectedAction = new useItem(selectedItem);
                             isValid = true;
                         }
@@ -118,22 +117,23 @@ public class InputHandler {
     }
 
     public Item selectItem(Player player) {
-        List<Item> inventory = player.getInventory();
+        List<Item> inventory = player.getInventory().stream().filter(item -> item.getQuantity() > 0).toList();
         Item selectedItem = null;
         boolean isValid = false;
 
-        if(inventory.isEmpty()){
+        
+        if (inventory.isEmpty()) {
             System.out.println("Inventory is Empty");
             return null;
         }
 
         do {
             System.out.println("Inventory");
-            for (int i=0; i<inventory.size(); i++){
-                System.out.println((i+1) +". " + inventory.get(i).getName() + " Quantity:" + inventory.get(i).getQuantity());
+            for (int i = 0; i < inventory.size(); i++) {
+                System.out.println((i + 1) + ". " + inventory.get(i).getName() + " Quantity:" + inventory.get(i).getQuantity());
             }
 
-            int cancelOption = inventory.size() +1;
+            int cancelOption = inventory.size() + 1;
             System.out.println(cancelOption + ".Cancel");
             System.out.println("Selection an Option 1-" + cancelOption);
 
@@ -141,14 +141,12 @@ public class InputHandler {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if(choice>0 && choice <= inventory.size()){
-                    selectedItem = inventory.get(choice-1);
+                if (choice > 0 && choice <= inventory.size()) {
+                    selectedItem = inventory.get(choice - 1);
                     isValid = true;
-                }
-                else if(choice == cancelOption){
-                    isValid=true;
-                }
-                else{
+                } else if (choice == cancelOption) {
+                    isValid = true;
+                } else {
                     System.out.println("Invalid Choice");
                 }
 
@@ -166,24 +164,25 @@ public class InputHandler {
         Combatant selectedTarget = null;
         boolean isValid = false;
 
+        List<Enemy> livingEnemies = enemies.stream().filter(Enemy::isAlive).toList();
+
         do {
             System.out.println("Select Target");
-            for(int i = 0; i < enemies.size(); i++){
-                Enemy enemy = enemies.get(i);
-                System.out.println((i+1) + "." + enemy.getName() + " Hp: " + enemy.getHp() + "/" + enemy.getMaxHp());
+            for (int i = 0; i < livingEnemies.size(); i++) {
+                Enemy enemy = livingEnemies.get(i);
+                    System.out.println((i + 1) + "." + enemy.getName() + " Hp: " + enemy.getHp() + "/" + enemy.getMaxHp());
             }
-            System.out.println("Select Target: (1-" + enemies.size() + ")");
+            System.out.println("Select Target: (1-" + livingEnemies.size() + ")");
 
             try {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                int index = choice -1;
-                if(index >= 0 && index < enemies.size()){
-                    selectedTarget = enemies.get(index);
+                int index = choice - 1;
+                if (index >= 0 && index < livingEnemies.size()) {
+                    selectedTarget = livingEnemies.get(index);
                     isValid = true;
-                }
-                else{
+                } else {
                     System.out.println("Invalid target");
                 }
 

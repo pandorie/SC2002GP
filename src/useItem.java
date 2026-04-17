@@ -19,9 +19,9 @@ public class useItem implements Action {
                 }
             }
             SelectedItem.use(player, enemy, log);
-            if(SelectedItem.getQuantity() <= 0){
-                player.removeItem(SelectedItem);
-            }
+//            if(SelectedItem.getQuantity() <= 0){
+//                player.removeItem(SelectedItem);
+//            }
 
         } else {
             return;

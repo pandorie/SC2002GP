@@ -50,9 +50,7 @@ public  class GameLog {
                 player = (Player) c;
                 combatantInfo.add(c.getName() + " Hp: " + c.getHp() + "/" + c.getMaxHp() + " Status:" + getStatus(c));
             } else {
-                if (c.isAlive()) {
                     combatantInfo.add(c.getName() + " Hp:" + c.getHp() + " Status:" + getStatus(c));
-                }
             }
 
         }

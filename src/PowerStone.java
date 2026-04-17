@@ -2,7 +2,7 @@ import java.util.List;
 
 public class PowerStone extends Item {
     public PowerStone(int quantity) {
-        super("PowerStone", quantity);
+        super("Power Stone", quantity);
     };
 
     public void use(Player target, List<Enemy> enemy, GameLog log) {

@@ -102,12 +102,15 @@ public class BattleEngine {
 
     public void UpdateGameState() {
 
-        Iterator<Enemy> iterator = enemies.iterator();
-        while (iterator.hasNext()) {
-            Enemy enemy = iterator.next();
-            if (!enemy.isAlive()) {
-                iterator.remove();
+        boolean allenemiesDead = true;
+        for(Enemy enemy: enemies){
+            if(enemy.isAlive()){
+                allenemiesDead = false;
+                break;
             }
+        }
+        if(allenemiesDead){
+            enemies.clear();
         }
 
         if (enemies.isEmpty()) {

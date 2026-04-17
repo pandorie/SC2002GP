@@ -56,15 +56,6 @@ public abstract class Level {
         }
     }
 
-
-    public void spawn_wolf(int wolf_count){
-        for(int i = 0; i<wolf_count; i++){
-            String letter = String.valueOf((char) ('A' + i));
-            this.addInitialEnemies(new Wolf(letter));
-
-        }
-    }
-
     public Level getCopy(){
         return null;
     }
