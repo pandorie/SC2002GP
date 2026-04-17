@@ -62,13 +62,13 @@ public class BattleEngine {
 
             UpdateGameState();
 
-            round++;
-
             BattleOver = CheckWinCondition();
 
             if (BattleOver) {
                 break;
             }
+
+            round++;
         }
         gameLog.checkFinalResult(player, round, enemies.size() + level.getBackupEnemies().size());
     }
