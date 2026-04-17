@@ -50,5 +50,9 @@ public abstract class Player extends Combatant {
         this.inventory.remove(item);
     }
 
+    public Player getCopy(){
+        return null;
+    }
+
 
 }

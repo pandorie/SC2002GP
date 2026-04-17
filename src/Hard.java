@@ -5,4 +5,9 @@ public class Hard extends Level{
         this.spawnBackupEnemies("goblin", 1);
         this.spawnBackupEnemies("wolf", 2);
     }
+
+    @Override
+    public Level getCopy() {
+        return new Hard();
+    }
 }

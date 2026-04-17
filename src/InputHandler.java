@@ -15,9 +15,9 @@ public class InputHandler {
 
         do {
             System.out.println("Select Difficulty");
-            System.out.println("1. Easy");
-            System.out.println("2. Medium");
-            System.out.println("3. Hard");
+            System.out.println("1. Easy (Total Enemies:3, 3 Goblins)");
+            System.out.println("2. Medium (Total Enemies:4, 1st Wave: 1 Goblin, 1 Wolf. 2nd Wave: 2 Wolves)");
+            System.out.println("3. Hard (Total Enemies:5, 1st Wave: 2 Goblin. 2nd Wave: 1 Goblin, 2 Wolves)");
             System.out.println("Select a difficulty 1-3");
 
             try {

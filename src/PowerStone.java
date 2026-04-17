@@ -19,4 +19,8 @@ public class PowerStone extends Item {
         setQuantity(getQuantity() - 1);
     }
 
+    @Override
+    public Item getCopy() {
+        return new PowerStone(1);
+    }
 }

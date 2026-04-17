@@ -19,4 +19,8 @@ public class Potion extends Item {
 
     }
 
+    @Override
+    public Item getCopy() {
+        return new Potion(1);
+    }
 }

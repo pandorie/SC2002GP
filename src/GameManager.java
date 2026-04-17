@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameManager {
     private InputHandler input;
     private Scanner scanner;
     private boolean isPlaying;
+    private GameSession gameSession;
 
     public GameManager() {
         this.input = new InputHandler();
@@ -14,10 +17,8 @@ public class GameManager {
 
     public void start() {
         System.out.println("Game started");
-        do {
-            handleMainMenu();
-        }
-        while (isPlaying);
+        handleMainMenu();
+
         scanner.close();
     }
 
@@ -48,17 +49,22 @@ public class GameManager {
     }
 
     public void BattleSetUp() {
+        displayEnemyInfo();
+
         Level selectLevel = input.SelectDifficulty();
 
         Player player = selectCharacter();
 
         SelectStartingItem(player);
+        List<Item>  startingItems = new ArrayList<>(player.getInventory());
+        this.gameSession = new GameSession(player,selectLevel,startingItems);
 
         TurnScheduler turnScheduler = new SpeedOrder();
 
         BattleEngine game = new BattleEngine(player, selectLevel, turnScheduler, input);
 
         game.StartBattle();
+        retry();
 
     }
 
@@ -108,9 +114,9 @@ public class GameManager {
         int count = 0;
         do {
             System.out.println("Select Item " + (count + 1) + " of 2:");
-            System.out.println("1. Potion");
-            System.out.println("2. Smoke Bomb");
-            System.out.println("3. Power Stone");
+            System.out.println("1. Potion (Heals for 100Hp)");
+            System.out.println("2. Smoke Bomb (When used, Enemy attacks do 0 damage in the current turn and the next turn)");
+            System.out.println("3. Power Stone (Trigger the special skill effect once, but it does not start or change the cooldown timer)");
 
             try {
                 int choice = scanner.nextInt();
@@ -139,6 +145,48 @@ public class GameManager {
             }
 
         } while (count < 2);
+
+    }
+
+    public void displayEnemyInfo(){
+        System.out.println("Goblin:");
+        System.out.println("Attributes: Hp:55 | Atk: 20 | Def: 15 | Spd: 25");
+        System.out.println("Wolf:");
+        System.out.println("Attributes: Hp:40 | Atk: 25 | Def: 5| Spd 35");
+    }
+
+    public void retry(){
+        System.out.println("1.Retry?");
+        System.out.println("2.New game");
+
+        try {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice){
+                case 1:
+                    Player player = gameSession.getNewPlayer();
+                    Level level = gameSession.getNewlevel();
+                    List<Item> items = gameSession.getNewItems();
+                    for(Item item: items){
+                        checkItemexist(player, item);
+                    }
+
+                    TurnScheduler turnScheduler = new SpeedOrder();
+                    BattleEngine retry  = new BattleEngine(player,level,turnScheduler,input);
+                    retry.StartBattle();
+                    retry();
+                    break;
+                case 2:
+                    handleMainMenu();
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a number");
+            scanner.nextLine();
+            retry();
+        }
+
 
     }
 

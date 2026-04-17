@@ -65,6 +65,10 @@ public abstract class Level {
         }
     }
 
+    public Level getCopy(){
+        return null;
+    }
+
 
 
 

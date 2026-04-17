@@ -67,7 +67,7 @@ public  class GameLog {
 
         System.out.println("End of Round " + round + ":");
         System.out.println(String.join(" | ", combatantInfo));
-        System.out.println(String.join(" | ", inventoryInfo) + "\n");
+        System.out.println(String.join(" | ", inventoryInfo));
 
     }
 
@@ -99,12 +99,16 @@ public  class GameLog {
         return " " + String.join(" ", Statuses);
     }
 
-    public void checkFinalResult(Player player){
+    public void checkFinalResult(Player player,int totalRounds, int remainingEnemies){
         if(player.isAlive()){
             System.out.println("Congratulations you won");
+            System.out.println("Remaining Hp: " + player.getHp());
+            System.out.println("Total Rounds: " + totalRounds);
         }
         else{
             System.out.println("Defeated");
+            System.out.println("Total Rounds: " + totalRounds);
+            System.out.println("Remaining Enemies: " + remainingEnemies);
         }
     }
 }

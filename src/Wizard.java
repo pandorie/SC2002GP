@@ -52,6 +52,11 @@ public class Wizard extends Player{
         }
     }
 
+    @Override
+    public Player getCopy() {
+        return new Wizard();
+    }
+
     public int getBonus_atk() {
         return bonus_atk;
     }
@@ -60,3 +65,4 @@ public class Wizard extends Player{
         this.bonus_atk = bonus_atk;
     }
 }
+

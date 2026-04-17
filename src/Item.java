@@ -21,6 +21,12 @@ public abstract class Item {
         this.quantity = quantity;
     }
 
-    public abstract void use(Player target, List<Enemy> enemy, GameLog log);
+    public Item getCopy(){
+        return null;
+    }
+
+    public void use(Player target, List<Enemy> enemy, GameLog log) {
+
+    }
 }
 

@@ -23,4 +23,9 @@ public class Warrior extends Player {
         StunEffect stun = new StunEffect();
         stun.apply(target, log);
     }
+
+    @Override
+    public Player getCopy() {
+        return new Warrior();
+    }
 }

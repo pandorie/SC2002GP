@@ -21,4 +21,8 @@ public class SmokeBomb extends Item {
         setQuantity(getQuantity() - 1);
     }
 
+    @Override
+    public Item getCopy() {
+        return new SmokeBomb(1);
+    }
 }

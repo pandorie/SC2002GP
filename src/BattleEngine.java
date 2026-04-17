@@ -21,16 +21,6 @@ public class BattleEngine {
         this.gameLog = new GameLog();
     }
 
-    public BattleEngine(Player player, Level level, List<Enemy> enemies, TurnScheduler turnScheduler, InputHandler input) {
-        this.player = player;
-        this.level = level;
-        this.enemies = enemies;
-        this.turnScheduler = turnScheduler;
-        this.input = input;
-        this.round = 1;
-        this.gameLog = new GameLog();
-    }
-
     public void StartBattle() {
         boolean BattleOver = false;
 
@@ -61,8 +51,8 @@ public class BattleEngine {
                 }
             }
 
-            for(Combatant currentCombatant: CombatantList){
-                if(currentCombatant.isAlive()){
+            for (Combatant currentCombatant : CombatantList) {
+                if (currentCombatant.isAlive()) {
                     currentCombatant.tickEffects(gameLog);
                 }
             }
@@ -79,7 +69,7 @@ public class BattleEngine {
                 break;
             }
         }
-        gameLog.checkFinalResult(player);
+        gameLog.checkFinalResult(player, round, enemies.size() + level.getBackupEnemies().size());
     }
 
     //New Method

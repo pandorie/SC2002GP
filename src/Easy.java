@@ -5,4 +5,8 @@ public class Easy extends Level{
         this.spawnInitialEnemies("goblin", 3);
     }
 
+    @Override
+    public Level getCopy() {
+        return new Easy();
+    }
 }
