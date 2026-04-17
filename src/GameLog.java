@@ -12,6 +12,16 @@ public  class GameLog {
         System.out.println(c.getName() + "'s Turn");
     }
 
+    public void shownTurnOrder(List<Combatant> turnOrder){
+        List<String> speedOrder = new ArrayList<>();
+        for(Combatant c: turnOrder){
+            if(c.isAlive()){
+                speedOrder.add(c.getName() + " Spd: " + c.getSpd());
+            }
+        }
+        System.out.println("Turn Order: " + String.join("->", speedOrder));
+    }
+
     public void showActionResult(String msg) {
         System.out.println(msg);
     }

@@ -32,6 +32,7 @@ public class BattleEngine {
             CombatantList.addAll(enemies);
 
             List<Combatant> turnOrder = turnScheduler.getOrder(CombatantList);
+            gameLog.shownTurnOrder(turnOrder);
 
             for (Combatant currentCombatant : turnOrder) {
                 if (!currentCombatant.isAlive()) {
