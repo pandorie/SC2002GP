@@ -150,9 +150,9 @@ public class GameManager {
 
     public void displayEnemyInfo(){
         System.out.println("Goblin:");
-        System.out.println("Attributes: Hp:55 | Atk: 20 | Def: 15 | Spd: 25");
+        System.out.println("Attributes: Hp:55 | Atk: 35 | Def: 15 | Spd: 25");
         System.out.println("Wolf:");
-        System.out.println("Attributes: Hp:40 | Atk: 25 | Def: 5| Spd 35");
+        System.out.println("Attributes: Hp:40 | Atk: 45 | Def: 5| Spd 35");
     }
 
     public void retry(){
