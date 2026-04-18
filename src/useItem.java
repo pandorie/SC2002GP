@@ -29,6 +29,11 @@ public class useItem implements Action {
     }
 
     @Override
+    public boolean requiresTarget(Combatant source) {
+        return this.SelectedItem.requiresTarget(source);
+    }
+
+    @Override
     public String getName() {
         return "useItem";
     }

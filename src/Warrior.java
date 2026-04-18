@@ -28,4 +28,9 @@ public class Warrior extends Player {
     public Player getCopy() {
         return new Warrior();
     }
+
+    @Override
+    public boolean skillsingleTarget() {
+        return true;
+    }
 }

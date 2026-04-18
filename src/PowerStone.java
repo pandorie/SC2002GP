@@ -23,4 +23,13 @@ public class PowerStone extends Item {
     public Item getCopy() {
         return new PowerStone(1);
     }
+
+
+    @Override
+    public boolean requiresTarget(Combatant source) {
+        if(source instanceof Player){
+            return ((Player) source).skillsingleTarget();
+        }
+        return false;
+    }
 }

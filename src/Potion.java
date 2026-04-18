@@ -20,6 +20,11 @@ public class Potion extends Item {
     }
 
     @Override
+    public boolean requiresTarget(Combatant source) {
+        return false;
+    }
+
+    @Override
     public Item getCopy() {
         return new Potion(1);
     }

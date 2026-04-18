@@ -29,6 +29,14 @@ public class SpecialSkill implements Action {
     }
 
     @Override
+    public boolean requiresTarget(Combatant source) {
+        if(source instanceof Player){
+            return ((Player) source).skillsingleTarget();
+        }
+        return false;
+    }
+
+    @Override
     public String getName() {
         return "Special Skill";
     }

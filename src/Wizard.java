@@ -16,7 +16,7 @@ public class Wizard extends Player{
 
     public void executeSpecialSkill(List<Enemy> targets, GameLog log){
         int enemykilled = 0;
-
+        log.showActionResult("Arcane Blast hits all enemies");
         for(Enemy target: targets){
             int damage = this.getAtk() - target.getDef();
             target.takeDamage(damage);
@@ -64,5 +64,6 @@ public class Wizard extends Player{
     public void setBonus_atk(int bonus_atk) {
         this.bonus_atk = bonus_atk;
     }
+
 }
 

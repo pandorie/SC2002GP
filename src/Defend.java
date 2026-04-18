@@ -12,4 +12,9 @@ public class Defend implements Action {
     public String getName() {
         return "Defend";
     }
+
+    @Override
+    public boolean requiresTarget(Combatant source) {
+        return false;
+    }
 }

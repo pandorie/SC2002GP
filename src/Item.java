@@ -28,5 +28,11 @@ public abstract class Item {
     public void use(Player target, List<Enemy> enemy, GameLog log) {
 
     }
+
+    // needed for power stone
+    public boolean requiresTarget(Combatant source){
+        return false;
+    }
+
 }
 

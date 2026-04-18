@@ -22,6 +22,11 @@ public class SmokeBomb extends Item {
     }
 
     @Override
+    public boolean requiresTarget(Combatant source) {
+        return false;
+    }
+
+    @Override
     public Item getCopy() {
         return new SmokeBomb(1);
     }

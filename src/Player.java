@@ -54,5 +54,9 @@ public abstract class Player extends Combatant {
         return null;
     }
 
+    public boolean skillsingleTarget(){
+        return false;
+    };
+
 
 }

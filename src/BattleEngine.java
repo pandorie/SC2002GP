@@ -88,11 +88,6 @@ public class BattleEngine {
             EnemyList.add(target);
         } else {
             EnemyList.addAll(enemies);
-            if (player instanceof Wizard && playerChoice instanceof SpecialSkill ||
-                    player instanceof Wizard && playerChoice instanceof useItem &&
-                            ((useItem) playerChoice).getSelectedItem() instanceof PowerStone) {
-                gameLog.showActionResult("Arcane Blast hits all enemies");
-            }
         }
 
         playerChoice.execute(player, EnemyList, gameLog);
@@ -133,20 +128,7 @@ public class BattleEngine {
 
 
     public boolean singleTarget(Player player, Action choice) {
-        if (choice instanceof BasicAttack) {
-            return true;
-        }
-        if (choice instanceof SpecialSkill) {
-            return player instanceof Warrior;
-        }
-
-        if (choice instanceof useItem) {
-            Item selectedItem = ((useItem) choice).getSelectedItem();
-            if (selectedItem instanceof PowerStone) {
-                return player instanceof Warrior;
-            }
-        }
-        return false;
+        return choice.requiresTarget(player);
     }
 
 
