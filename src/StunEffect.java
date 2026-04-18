@@ -19,5 +19,8 @@ public class StunEffect extends StatusEffect {
         log.showStatusExpired(c, "Stun Effect");
     }
 
-
+    @Override
+    public String getStatusName() {
+        return "Stunned";
+    }
 }

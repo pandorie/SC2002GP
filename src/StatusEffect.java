@@ -35,4 +35,8 @@ public abstract class StatusEffect {
     public int getDuration(){
         return this.duration;
     }
+
+    public String getStatusName(){
+        return "";
+    }
 }

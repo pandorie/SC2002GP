@@ -20,6 +20,6 @@ public class BasicAttack implements Action{
 
     @Override
     public String getName() {
-        return " Basic Attack";
+        return "Basic Attack";
     }
 }

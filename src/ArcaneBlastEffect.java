@@ -48,4 +48,9 @@ public class ArcaneBlastEffect extends StatusEffect{
     public void setStacks(int stacks) {
         this.stacks = stacks;
     }
+
+    @Override
+    public String getStatusName() {
+        return "Arcane Blast";
+    }
 }

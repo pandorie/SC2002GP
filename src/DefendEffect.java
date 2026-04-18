@@ -23,4 +23,9 @@ public class DefendEffect extends StatusEffect {
         c.setDef(c.getDef() - Bonus_def);
         log.showStatusExpired(c, "Defend");
     }
+
+    @Override
+    public String getStatusName() {
+        return "Defending";
+    }
 }

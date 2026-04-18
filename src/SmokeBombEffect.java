@@ -23,4 +23,9 @@ public class SmokeBombEffect extends StatusEffect{
         c.setAtk(this.OriginalAttack);
         log.showStatusExpired(c, "Smoke Bomb");
     }
+
+    @Override
+    public String getStatusName() {
+        return "Smoke Bomb";
+    }
 }

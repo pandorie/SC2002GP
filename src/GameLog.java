@@ -89,19 +89,7 @@ public  class GameLog {
         List<String> Statuses = new ArrayList<>();
 
         for(StatusEffect effect : effects){
-            if(effect instanceof StunEffect){
-                Statuses.add("Stunned");
-            }
-            else if(effect instanceof SmokeBombEffect){
-                Statuses.add("Smoked Bombed");
-            }
-            else if (effect instanceof DefendEffect) {
-                Statuses.add("Defending");
-            }
-            else if(effect instanceof ArcaneBlastEffect){
-                ArcaneBlastEffect arcaneStack = (ArcaneBlastEffect) effect;
-                Statuses.add("Arcane Stack:" +arcaneStack.getStacks());
-            }
+            Statuses.add(effect.getStatusName());
         }
 
         return " " + String.join(" ", Statuses);
